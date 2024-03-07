@@ -1,72 +1,85 @@
-import {FC} from "react";
+import { FC, useEffect, useState } from "react";
 import {
-    Events, EventsTitle,
-    MainBlock,
-    MainInfo,
-    MyEvents, MyEventsTitle,
-    Recommendation, RecommendationSubTitle, RecommendationTitle,
-    SearchForm,
-    SearchFormButton,
-    SearchFormInput,
-    Work,
-    WorkLists,
+	Events, EventsTitle,
+	MainBlock,
+	MainInfo,
+	MyEvents, MyEventsTitle,
+	Recommendation, RecommendationSubTitle, RecommendationTitle,
+	SearchForm,
+	SearchFormButton,
+	SearchFormInput,
+	Work,
+	WorkLists,
 } from "./mainStyle";
-import {Container} from "../global";
+import { Container } from "../global";
+import { dataBase } from "../../data";
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../../store/reducer";
 
 export const Main: FC = () => {
 
+	const dispatch = useDispatch()
+	const data = useSelector((state: any) => state.data)
 
-    return (
-        <MainBlock>
-            <Container>
-                <div>
-                    <SearchForm>
-                        <SearchFormInput type='test' placeholder='Введите профессию или должность'/>
-                        <SearchFormButton>Найти</SearchFormButton>
-                    </SearchForm>
-                    <MainInfo>
-                        <MyEvents>
-                            <MyEventsTitle>Мои события</MyEventsTitle>
-                            <Events>
-                                <EventsTitle>Отклики и приглашения</EventsTitle>
-                                <EventsTitle>**5**</EventsTitle>
-                            </Events>
+	useEffect(() => {
+		setTimeout(() => {
+			dispatch(getData(dataBase.results))
+		}, 1000)
+	}, []);
 
-                            <Events>
-                                <EventsTitle>Избранные вакансии</EventsTitle>
-                                <EventsTitle>**13**</EventsTitle>
-                            </Events>
-                        </MyEvents>
-                        <Recommendation>
-                            <RecommendationTitle>Рекомендуем лично вам</RecommendationTitle>
-                            <RecommendationSubTitle>Подобрали вакансии для вашего резюме</RecommendationSubTitle>
-                            <WorkLists>
-                                <Work>
-                                    <h3>Вакансия</h3>
-                                    <p>ЗП</p>
-                                    <p>Город</p>
-                                    <button>Откликнуться</button>
-                                </Work>
-                                <Work>
-                                    <h3>Вакансия</h3>
-                                    <p>ЗП</p>
-                                    <p>Город</p>
-                                    <button>Откликнуться</button>
-                                </Work>
-                                <Work>
-                                    <h3>Вакансия</h3>
-                                    <p>ЗП</p>
-                                    <p>Город</p>
-                                    <button>Откликнуться</button>
-                                </Work>
-                            </WorkLists>
-                        </Recommendation>
+	const renderVacansion = () => {
+		data.map((value: { work: string, wages: number, description: string }) => {
 
-                    </MainInfo>
-                </div>
-            </Container>
-        </MainBlock>
-    )
+			return (
+				<Work>
+					<h3>{value.work}</h3>
+					<p>{value.wages}</p>
+					<p>{value.description}</p>
+					<button>Откликнуться</button>
+				</Work>
+			)
+		})
+	}
+
+	renderVacansion()
+
+	return (
+		<MainBlock>
+			<Container>
+				<div>
+					<SearchForm>
+						<SearchFormInput type='test' placeholder='Введите профессию или должность' />
+						<SearchFormButton>Найти</SearchFormButton>
+
+					</SearchForm>
+					<MainInfo>
+						<MyEvents>
+							<MyEventsTitle>Мои события</MyEventsTitle>
+							<Events>
+								<EventsTitle>Отклики и приглашения</EventsTitle>
+								<EventsTitle>**5**</EventsTitle>
+							</Events>
+
+							<Events>
+								<EventsTitle>Избранные вакансии</EventsTitle>
+								<EventsTitle>**13**</EventsTitle>
+							</Events>
+						</MyEvents>
+						<Recommendation>
+							<RecommendationTitle>Вакансии</RecommendationTitle>
+							<RecommendationSubTitle>Подобрали вакансии для вашего резюме</RecommendationSubTitle>
+							<WorkLists>
+
+								{renderVacansion()}
+
+							</WorkLists>
+						</Recommendation>
+
+					</MainInfo>
+				</div>
+			</Container>
+		</MainBlock>
+	)
 }
 
 // Делать верстку сайта без логики по максимуму кнопочки, формы, если получится сделать типизацию,

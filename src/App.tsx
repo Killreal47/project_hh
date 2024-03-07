@@ -10,6 +10,7 @@ import {Resume} from "./components/Resume/Resume";
 import {Profile} from "./components/Profile/Profile";
 import {Footer} from "./components/footer/Footer";
 import {Header} from "./components/Header/Header";
+import {MyResume} from "./components/MyResume/MyResume";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="resume" element={<Resume/>}/>
+                    <Route path="resume/my-resume" element={<MyResume/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                 </Routes>
             </MainBlock>

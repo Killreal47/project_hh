@@ -1,8 +1,6 @@
 import styled from "styled-components";
 export const MainBlock = styled.div`
 `
-
-
 export const SearchForm = styled.div`
     margin-top: 30px;
     display: flex;

@@ -9,9 +9,10 @@ import {
     ResumeContainer
 } from "./resumeStyle";
 import {Container} from "../global";
+import {Navigate, useNavigate} from "react-router-dom";
 
 export const Resume = () => {
-
+    const navigate = useNavigate();
     return (
         <div>
             <Container>
@@ -27,13 +28,8 @@ export const Resume = () => {
                         <h2>Откликнитесь еще **1** раз</h2>
                         <div>Откликнулись **9** раз из 10</div>
                     </div>
-                    <MyResume>
+                    <MyResume onClick={() => navigate('/resume/my-resume')}>
                         <MyResumeTitle>Резюме: **Frontend-разработчик**</MyResumeTitle>
-                        <MyResumeBlock>
-                            <MyResumeBtn>Редактировать</MyResumeBtn>
-                            <MyResumeBtn>Дублировать</MyResumeBtn>
-                        </MyResumeBlock>
-
                     </MyResume>
                 </ResumeContainer>
 

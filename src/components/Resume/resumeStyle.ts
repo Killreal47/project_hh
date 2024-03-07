@@ -28,16 +28,15 @@ export const MyResumes = styled.div`
 export const MyResume = styled.div`
     margin-top: 50px;
     border: 2px solid cornflowerblue;
-    padding: 5px;
-    
+    padding: 25px;
+    cursor: pointer;
 `
 export const MyResumeTitle = styled.div`
-font-weight: 600;
+    font-weight: 600;
 `
 
 export const MyResumeBlock = styled.div`
     display: flex;
-    
     gap: 30px;
     cursor: pointer;
 `
